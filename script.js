@@ -37,3 +37,68 @@ const questions = [
     }
 ];
 
+const questionN = document.getElementById("questionN");
+const questionText = document.getElementById("questionText");
+const answerA = document.getElementById("answer_a");
+const answerB = document.getElementById("answer_b");
+const answerC = document.getElementById("answer_c");
+const answerD = document.getElementById("answer_d");
+const answerCheckboxA = document.getElementById("a");
+const answerCheckboxB = document.getElementById("b");
+const answerCheckboxC = document.getElementById("c");
+const answerCheckboxD = document.getElementById("d");
+const button = document.getElementById("btn");
+
+let currentQuestion = 0;
+let currentAnswerSelected =  '';
+let score = 0;
+
+const loadQuiz = () => {
+    if(currentQuestion >= questions.length){
+        alert(`That was the last question. You scored ${score} of 5.`);
+        button.disabled = true;
+        button.className = "disabledBtn";
+        return null;
+    }
+    questionN.innerHTML = `Question (${currentQuestion + 1}/5)`;
+    questionText.innerHTML = questions[currentQuestion].question;
+    answerA.innerHTML = questions[currentQuestion].a;
+    answerB.innerHTML = questions[currentQuestion].b;
+    answerC.innerHTML = questions[currentQuestion].c;
+    answerD.innerHTML = questions[currentQuestion].d;
+    button.disabled = true;
+    button.className = "disabledBtn";
+}
+
+loadQuiz();
+
+
+const selectedAnswer = (answer) => {
+    currentAnswerSelected = answer;
+    // console.log("Respuesta", currentAnswerSelected);
+    button.disabled = false;
+    button.className = "enabledBtn";
+};
+
+const questionQuiz = () => {
+    isCorrect();
+    currentQuestion++;
+    loadQuiz();
+    resetCheckboxes();
+    // console.log(currentQuestion);
+};
+
+const resetCheckboxes = () => {
+    answerCheckboxA.checked = false;
+    answerCheckboxB.checked = false;
+    answerCheckboxC.checked = false;
+    answerCheckboxD.checked = false;
+};
+
+const isCorrect = () => {
+    if(currentAnswerSelected == questions[currentQuestion].answer) score++;
+    console.log(`Pregunta actual: ${questions[currentQuestion].question}`);
+    console.log(`Respuesta elegida: ${currentAnswerSelected}`);
+    console.log(`Respuesta correcta: ${questions[currentQuestion].answer}`);
+    console.log(`Acertó? ${currentAnswerSelected === questions[currentQuestion].answer}`)
+};

@@ -5,31 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <title>Quiz</title>
 </head>
 <body>
     <div class="quizContainer">
-        <h1>Question text</h1>
+        <h3 id="questionN">Question</h3>
+        <h1 id="questionText">Question text</h1>
         <ul>
             <li>
-                <input type="radio" name="answer" id="a">
-                <label for="a">Answer</label>
+                <input type="radio" name="answer" id="a" onclick='selectedAnswer("a")'>
+                <label for="a" id="answer_a">Answer</label>
             </li>
             <li>
-                <input type="radio" name="answer" id="b">
-                <label for="b">Answer</label>
+                <input type="radio" name="answer" id="b" onclick='selectedAnswer("b")'>
+                <label for="b" id="answer_b">Answer</label>
             </li>
             <li>
-                <input type="radio" name="answer" id="c">
-                <label for="c">Answer</label>
+                <input type="radio" name="answer" id="c" onclick='selectedAnswer("c")'>
+                <label for="c" id="answer_c">Answer</label>
             </li>
             <li>
-                <input type="radio" name="answer" id="d">
-                <label for="d">Answer</label>
+                <input type="radio" name="answer" id="d" onclick='selectedAnswer("d")'>
+                <label for="d" id="answer_d">Answer</label>
             </li>
         </ul>
-        <button>Check answer</button>
+        <button onclick='questionQuiz()' id="btn" class="enabledBtn">Check answer</button>
     </div>
 </body>
 </html>
