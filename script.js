@@ -37,6 +37,7 @@ const questions = [
     }
 ];
 
+const quizContainer = document.getElementById("quizContainer");
 const questionN = document.getElementById("questionN");
 const questionText = document.getElementById("questionText");
 const answerA = document.getElementById("answer_a");
@@ -55,9 +56,17 @@ let score = 0;
 
 const loadQuiz = () => {
     if(currentQuestion >= questions.length){
-        alert(`That was the last question. You scored ${score} of 5.`);
-        button.disabled = true;
-        button.className = "disabledBtn";
+        if(score >= Math.ceil(questions.length / 2)){
+            quizContainer.innerHTML = `
+            <h1>Congratulations! You answered ${score} questions correctly.</h1>
+            <button onclick='location.reload()' class='enabledBtn'>Try again</button>
+            `
+        } else {
+            quizContainer.innerHTML = `
+            <h1>You answered ${score} questions correctly. Better luck next time!</h1>
+            <button onclick='location.reload()' class='enabledBtn'>Try again</button>
+            `
+        }
         return null;
     }
     questionN.innerHTML = `Question (${currentQuestion + 1}/5)`;
@@ -75,7 +84,6 @@ loadQuiz();
 
 const selectedAnswer = (answer) => {
     currentAnswerSelected = answer;
-    // console.log("Respuesta", currentAnswerSelected);
     button.disabled = false;
     button.className = "enabledBtn";
 };
@@ -85,7 +93,6 @@ const questionQuiz = () => {
     currentQuestion++;
     loadQuiz();
     resetCheckboxes();
-    // console.log(currentQuestion);
 };
 
 const resetCheckboxes = () => {
@@ -97,8 +104,4 @@ const resetCheckboxes = () => {
 
 const isCorrect = () => {
     if(currentAnswerSelected == questions[currentQuestion].answer) score++;
-    console.log(`Pregunta actual: ${questions[currentQuestion].question}`);
-    console.log(`Respuesta elegida: ${currentAnswerSelected}`);
-    console.log(`Respuesta correcta: ${questions[currentQuestion].answer}`);
-    console.log(`Acertó? ${currentAnswerSelected === questions[currentQuestion].answer}`)
 };
